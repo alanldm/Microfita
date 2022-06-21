@@ -21,7 +21,7 @@ def A(z, e_relativa):
 def B(z, e_relativa):
     return (377*np.pi)/(2*z*np.sqrt(e_relativa))
 
-def w(e_relativa, A, B, h):
+def w_h(e_relativa, A, B, h):
     aux1 = (8*np.exp(A))/(np.exp(2*A)-2)
     aux2 = (2/np.pi)*(B-1-np.log(2*B-1)+((e_relativa-1)/(2*e_relativa))*(np.log(B-1)+0.39-(0.61/e_relativa)))
 
@@ -29,3 +29,29 @@ def w(e_relativa, A, B, h):
         return aux1*h
     elif aux2>=2:
         return aux2*h
+
+escolha = int(input("1 - Calcular a partir das dimensões \n 2 - Calcular a partir das características"))
+
+if escolha==1:
+    print("A largura do dielétrico e da linha deverão estar na mesma unidade: ")
+    h = float(input("Digite a largura do dielétrico: "))
+    w = float(input("Digite a largura da linha: "))
+    e = float(input("Digite o valor da permissividade relativa do dielétrico: "))
+
+    ef = e_efetiva(e, w, h)
+
+    print(f"A permissividade relativa efetiva é: {ef}")
+    print(f"A velocidade de propagação é: {velocidade(ef)}")
+    print(f"A impedância característica é: {impedancia(e, w, h)}")
+
+elif escolha==2:
+    z = float(input("Digite a impedância desejada: "))
+    h = float(input("Digite a largura do dielétrico: "))
+    e = float(input("Digite o valor da permissividade relativa do dielétrico: "))
+
+    w = w_h(e, A(z, e), B(z, e), h)
+    ef = e_efetiva(e, w, h)
+
+    print(f"A largura da linha deverá ser de: {w}")
+    print(f"A permissividade relativa efetiva será de: {ef}")
+    print(f"A velocidade de propagação será de: {velocidade(ef)}")
