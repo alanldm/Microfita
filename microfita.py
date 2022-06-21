@@ -21,7 +21,7 @@ def A(z, e_relativa):
 def B(z, e_relativa):
     return (377*np.pi)/(2*z*np.sqrt(e_relativa))
 
-def w_h(e_relativa, A, B, h):
+def w(e_relativa, A, B, h):
     aux1 = (8*np.exp(A))/(np.exp(2*A)-2)
     aux2 = (2/np.pi)*(B-1-np.log(2*B-1)+((e_relativa-1)/(2*e_relativa))*(np.log(B-1)+0.39-(0.61/e_relativa)))
 
