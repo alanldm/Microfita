@@ -17,3 +17,6 @@ def impedancia(e, w, h):
 
 def A(z, e_relativa):
     return (z/60)*np.sqrt((e_relativa+1)/2)+((e_relativa-1)/(e_relativa+1))*(0.23+0.11/e_relativa)
+
+def B(z, e_relativa):
+    return (377*np.pi)/(2*z*np.sqrt(e_relativa))
